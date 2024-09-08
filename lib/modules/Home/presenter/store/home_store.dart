@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pokedex_sicoob/modules/Home/data/usecases/get_pokemons_usecase.dart';
 import 'package:pokedex_sicoob/modules/Home/presenter/states/pokemon_state.dart';
@@ -16,6 +17,9 @@ abstract class HomeStore with Store {
     required this.getPokemonsUseCase,
   });
 
+  ScrollController scrollController = ScrollController();
+  int page = 1;
+
   @observable
   PokemonState pokemonState = PokemonLoadingState();
 
@@ -32,6 +36,32 @@ abstract class HomeStore with Store {
       pokemonState = PokemonErrorState(
         "Algo deu errado na solicitação, tente novamente mais tarde! $e",
       );
+    }
+  }
+
+  @action
+  Future<void> fetchMorePokemons({required int page}) async {
+    try {
+      final response = await getPokemonsUseCase.getPokemons(page: page);
+
+      final firstsPokemons = (pokemonState as PokemonSuccessState).pokemons;
+
+      pokemonState = PokemonSuccessState([
+        ...firstsPokemons,
+        ...response,
+      ]);
+    } catch (e) {
+      print(e);
+      pokemonState = PokemonErrorState(
+        "Algo deu errado na solicitação, tente novamente mais tarde! $e",
+      );
+    }
+  }
+
+  Future<void> scrollListener() async {
+    if (scrollController.position.pixels ==
+        scrollController.position.maxScrollExtent) {
+      await fetchMorePokemons(page: ++page);
     }
   }
 }

@@ -33,6 +33,15 @@ mixin _$HomeStoreImp on HomeStore, Store {
     return _$fetchPokemonsAsyncAction.run(() => super.fetchPokemons());
   }
 
+  late final _$fetchMorePokemonsAsyncAction =
+      AsyncAction('HomeStore.fetchMorePokemons', context: context);
+
+  @override
+  Future<void> fetchMorePokemons({required int page}) {
+    return _$fetchMorePokemonsAsyncAction
+        .run(() => super.fetchMorePokemons(page: page));
+  }
+
   @override
   String toString() {
     return '''

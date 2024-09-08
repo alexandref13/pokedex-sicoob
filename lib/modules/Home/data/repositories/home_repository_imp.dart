@@ -11,8 +11,8 @@ class HomeRepositoryImp implements HomeRepository {
   HomeRepositoryImp({required this.client});
 
   @override
-  Future<List<PokemonModel>> getPokemons() async {
-    final response = await client.get(PokemonsEndpoint.getPokemon());
+  Future<List<PokemonModel>> getPokemons({int? page}) async {
+    final response = await client.get(PokemonsEndpoint.getPokemon(page));
 
     List<PokemonModel> pokemons = [];
     final data = json.decode(response.body)["results"] as List;

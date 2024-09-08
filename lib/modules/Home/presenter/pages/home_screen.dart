@@ -15,10 +15,18 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   HomeStore store = GetIt.instance();
+
   @override
   void initState() {
     store.fetchPokemons();
+    store.scrollController.addListener(store.scrollListener);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    store.scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -48,6 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
         if (pokemonState is PokemonSuccessState) {
           return GridView.builder(
+            controller: store.scrollController,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 8,
