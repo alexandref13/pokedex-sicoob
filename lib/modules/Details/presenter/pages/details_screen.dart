@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pokedex_sicoob/core/extensions/string_extensions.dart';
+import 'package:pokedex_sicoob/core/service/pokemon_platform_channel.dart';
 import 'package:pokedex_sicoob/core/widgets/loading_widget.dart';
 import 'package:pokedex_sicoob/modules/Details/presenter/states/pokemon_details_state.dart';
 import 'package:pokedex_sicoob/modules/Details/presenter/store/details_store.dart';
@@ -21,6 +22,9 @@ class DetailsScreen extends StatefulWidget {
 
 class _DetailsScreenState extends State<DetailsScreen> {
   DetailsStore store = GetIt.instance();
+  PokemonPlatformChannel pokemonPlatformChannel = GetIt.instance();
+
+  var result = "";
 
   @override
   void initState() {
@@ -65,6 +69,22 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       pokemon: pokemonState.pokemon,
                     ),
                   ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      result = await pokemonPlatformChannel.getBatteryLevel();
+
+                      setState(() {});
+                    },
+                    child: Text("Busque a bateria"),
+                  ),
+                  Text(
+                    result,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 30)
                 ],
               );
             }
