@@ -25,10 +25,4 @@ class HomeRepositoryImp implements HomeRepository {
       throw Exception();
     }
   }
-
-  @override
-  Future<List> getPokemonsDetails() {
-    // TODO: implement getPokemonsDetails
-    throw UnimplementedError();
-  }
 }

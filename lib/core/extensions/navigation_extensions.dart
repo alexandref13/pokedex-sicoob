@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
 extension NavigationExtensions on BuildContext {
+  void pushTo(Widget page) {
+    Navigator.push(
+      this,
+      MaterialPageRoute(builder: (context) => page),
+    );
+  }
+
   Future<T?> pushNamed<T>(String routeName, {Object? arguments}) {
     return Navigator.pushNamed(
       this,
@@ -37,5 +44,10 @@ extension NavigationExtensions on BuildContext {
 
   bool canPop() {
     return Navigator.canPop(this);
+  }
+
+  Object? getArguments() {
+    final ModalRoute? modalRoute = ModalRoute.of(this);
+    return modalRoute?.settings.arguments;
   }
 }
