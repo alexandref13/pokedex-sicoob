@@ -18,7 +18,11 @@ class DetailsPokemonInfoWidget extends StatelessWidget {
       },
       {
         "title": "Altura: ",
-        "value": pokemon.height,
+        "value": "${pokemon.height} dm",
+      },
+      {
+        "title": "Peso: ",
+        "value": "${pokemon.weight} hg",
       },
       {
         "title": "Experiência: ",

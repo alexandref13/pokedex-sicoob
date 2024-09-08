@@ -86,13 +86,17 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     onPressed: () async {
                       store.handleGetBatteryLevel();
                     },
-                    child: Text("Busque a bateria"),
+                    child: Text(
+                      "Veja agora a porcentagem de capturar este pokemon de acordo com sua bateria",
+                      textAlign: TextAlign.center,
+                    ),
                   ),
+                  SizedBox(height: 8),
                   Text(
                     store.batteryLevel,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 30)
+                  SizedBox(height: 24)
                 ],
               );
             }

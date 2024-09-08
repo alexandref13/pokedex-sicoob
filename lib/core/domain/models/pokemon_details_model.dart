@@ -8,6 +8,7 @@ class PokemonDetailsModel extends PokemonDetailsEntity {
     required super.name,
     required super.baseExperience,
     required super.height,
+    required super.weight,
   });
 
   String get image =>
@@ -19,6 +20,7 @@ class PokemonDetailsModel extends PokemonDetailsEntity {
       name: json['name'],
       baseExperience: json['base_experience'],
       height: json['height'],
+      weight: json['weight'],
     );
   }
 
@@ -28,6 +30,7 @@ class PokemonDetailsModel extends PokemonDetailsEntity {
       'name': name,
       'base_experience': baseExperience,
       'height': height,
+      'weight': weight,
     };
   }
 }
