@@ -25,6 +25,7 @@ void main() {
         name: "pikachu",
         baseExperience: 10,
         height: 10,
+        weight: 10,
       );
 
       when(mockHomeRepository.getPokemonByName(name: name))

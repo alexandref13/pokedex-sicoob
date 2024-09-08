@@ -9,6 +9,7 @@ void main() {
       name: "pikachu",
       baseExperience: 10,
       height: 10,
+      weight: 10,
     );
     test('should be a subclass of PokemonDetailsEntity', () {
       expect(pokemonDetailsModel, isA<PokemonDetailsEntity>());
@@ -20,6 +21,7 @@ void main() {
         "name": "pikachu",
         "base_experience": 10,
         "height": 10,
+        "weight": 10,
       };
 
       final result = PokemonDetailsModel.fromJson(jsonMap);
@@ -35,6 +37,7 @@ void main() {
         "name": "pikachu",
         "base_experience": 10,
         "height": 10,
+        "weight": 10,
       };
       final result = pokemonDetailsModel.toJson();
       expect(result, expectedMap);
@@ -46,6 +49,7 @@ void main() {
         "name": "pikachu",
         "base_experience": 10,
         "height": 10,
+        "weight": 10,
       };
 
       final result = PokemonDetailsModel.fromJson(jsonMap);

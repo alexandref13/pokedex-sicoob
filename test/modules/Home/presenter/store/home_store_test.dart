@@ -159,6 +159,7 @@ void main() {
         name: "pikachu",
         baseExperience: 10,
         height: 10,
+        weight: 10,
       );
 
       when(mockGetPokemonByNameUsecase.getPokemonByName(name: name)).thenAnswer(

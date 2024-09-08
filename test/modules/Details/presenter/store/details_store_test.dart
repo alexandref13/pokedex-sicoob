@@ -30,7 +30,12 @@ void main() {
     test('should return pokemon detail when fetchPokemonById is successful',
         () async {
       final pokemonDetails = PokemonDetailsModel(
-          id: 1, name: "pikachu", baseExperience: 10, height: 10);
+        id: 1,
+        name: "pikachu",
+        baseExperience: 10,
+        height: 10,
+        weight: 10,
+      );
 
       when(mockGetPokemonDetailsUsecase.getPokemonDetails(id: id)).thenAnswer(
         (_) async => pokemonDetails,

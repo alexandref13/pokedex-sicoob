@@ -61,6 +61,7 @@ void main() {
         "name": "pikachu",
         "base_experience": 10,
         "height": 10,
+        "weight": 10,
       });
 
       when(mockClient.get(any))
