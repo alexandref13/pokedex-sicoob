@@ -1,5 +1,5 @@
+import 'package:pokedex_sicoob/core/domain/models/pokemon_details_model.dart';
 import 'package:pokedex_sicoob/modules/Details/data/repositories/details_repository.dart';
-import 'package:pokedex_sicoob/modules/Details/domain/models/pokemon_details_model.dart';
 
 abstract class GetPokemonDetailsUsecase {
   Future<PokemonDetailsModel> getPokemonDetails({required String id});

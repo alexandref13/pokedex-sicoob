@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pokedex_sicoob/core/domain/models/pokemon_details_model.dart';
+import 'package:pokedex_sicoob/core/extensions/navigation_extensions.dart';
 import 'package:pokedex_sicoob/core/extensions/string_extensions.dart';
 import 'package:pokedex_sicoob/core/service/pokemon_platform_channel.dart';
 import 'package:pokedex_sicoob/core/widgets/loading_widget.dart';
@@ -10,10 +12,10 @@ import 'package:pokedex_sicoob/modules/Details/presenter/widgets/details_pokemon
 import 'package:pokedex_sicoob/modules/Details/presenter/widgets/details_pokemon_info_widget.dart';
 
 class DetailsScreen extends StatefulWidget {
-  final String pokemonId;
+  final String? pokemonId;
   const DetailsScreen({
     super.key,
-    required this.pokemonId,
+    this.pokemonId,
   });
 
   @override
@@ -28,12 +30,21 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
   @override
   void initState() {
-    store.fetchPokemonById(id: widget.pokemonId);
+    if (widget.pokemonId != null) {
+      store.fetchPokemonById(id: widget.pokemonId!);
+    }
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final pokemon = context.getArguments();
+
+    if (pokemon != null) {
+      store.pokemonState =
+          PokemonDetailsSuccessState(pokemon as PokemonDetailsModel);
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Observer(

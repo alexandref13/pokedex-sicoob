@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pokedex_sicoob/core/widgets/loading_widget.dart';
+import 'package:pokedex_sicoob/modules/Home/presenter/states/pokemon_by_name_state.dart';
 import 'package:pokedex_sicoob/modules/Home/presenter/states/pokemon_state.dart';
 import 'package:pokedex_sicoob/modules/Home/presenter/store/home_store.dart';
+import 'package:pokedex_sicoob/modules/Home/presenter/widgets/pokemon_box_search_widget.dart';
 import 'package:pokedex_sicoob/modules/Home/presenter/widgets/pokemon_item_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -35,44 +37,62 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text("Pokedex Sicoob"),
       ),
-      body: Observer(builder: (context) {
-        var pokemonState = store.pokemonState;
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+            child: PokemonBoxSearchWidget(),
+          ),
+          Observer(
+            builder: (context) {
+              var pokemonState = store.pokemonState;
 
-        if (pokemonState is PokemonErrorState) {
-          return Column(
-            children: [
-              Center(
-                child: Text(pokemonState.message),
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  await store.fetchPokemons();
-                },
-                child: const Text("Buscar novamente Pokemons"),
-              )
-            ],
-          );
-        }
+              if (pokemonState is PokemonErrorState) {
+                return Expanded(
+                  child: Column(
+                    children: [
+                      Center(
+                        child: Text(pokemonState.message),
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          await store.fetchPokemons();
+                        },
+                        child: const Text("Buscar novamente Pokemons"),
+                      )
+                    ],
+                  ),
+                );
+              }
 
-        if (pokemonState is PokemonSuccessState) {
-          return GridView.builder(
-            controller: store.scrollController,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 8,
-              mainAxisSpacing: 8,
-              childAspectRatio: 1,
-            ),
-            itemCount: pokemonState.pokemons.length,
-            itemBuilder: (context, index) {
-              var pokemon = pokemonState.pokemons[index];
-              return PokemonItemWidget(pokemon: pokemon);
+              if (pokemonState is PokemonSuccessState) {
+                return Expanded(
+                  child: GridView.builder(
+                    controller: store.scrollController,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 8,
+                      mainAxisSpacing: 8,
+                      childAspectRatio: 1,
+                    ),
+                    itemCount: pokemonState.pokemons.length,
+                    itemBuilder: (context, index) {
+                      var pokemon = pokemonState.pokemons[index];
+                      return PokemonItemWidget(pokemon: pokemon);
+                    },
+                  ),
+                );
+              }
+
+              if (store.pokemonByNameState is PokemonByNameLoadingState) {
+                return const LoadingWidget();
+              }
+
+              return const LoadingWidget();
             },
-          );
-        }
-
-        return const LoadingWidget();
-      }),
+          ),
+        ],
+      ),
     );
   }
 }

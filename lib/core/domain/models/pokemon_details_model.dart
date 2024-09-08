@@ -1,4 +1,6 @@
-import 'package:pokedex_sicoob/modules/Details/domain/entities/pokemon_details_entity.dart';
+import 'package:pokedex_sicoob/core/domain/entities/pokemon_details_entity.dart';
+
+// NOTE -> No momento que meu modulo Home precisa do mesmo model que temos em details, eu decido colocar esta domain em core, pra ser algo usado em toda a aplicaçao
 
 class PokemonDetailsModel extends PokemonDetailsEntity {
   PokemonDetailsModel({

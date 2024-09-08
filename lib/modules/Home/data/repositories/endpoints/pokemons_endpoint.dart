@@ -13,4 +13,9 @@ class PokemonsEndpoint {
       "limit": "20",
     });
   }
+
+  static Uri getPokemonByName(String name) => Uri.https(
+        BASE_URL,
+        '/api/v2/pokemon/${name}',
+      );
 }

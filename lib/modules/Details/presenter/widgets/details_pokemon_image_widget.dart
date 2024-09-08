@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex_sicoob/core/domain/models/pokemon_details_model.dart';
 import 'package:pokedex_sicoob/core/widgets/custom_cached_image_widget.dart';
-import 'package:pokedex_sicoob/modules/Details/domain/models/pokemon_details_model.dart';
 
 class DetailsPokemonImageWidget extends StatelessWidget {
   final PokemonDetailsModel pokemon;
