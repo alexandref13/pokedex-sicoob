@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pokedex_sicoob/modules/Details/domain/entities/pokemon_details_entity.dart';
-import 'package:pokedex_sicoob/modules/Details/domain/models/pokemon_details_model.dart';
+import 'package:pokedex_sicoob/core/domain/entities/pokemon_details_entity.dart';
+import 'package:pokedex_sicoob/core/domain/models/pokemon_details_model.dart';
 
 void main() {
   group("Pokemon Details Model", () {

@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:pokedex_sicoob/core/domain/models/pokemon_details_model.dart';
 import 'package:pokedex_sicoob/modules/Details/data/use_cases/get_pokemon_details_usecase.dart';
-import 'package:pokedex_sicoob/modules/Details/domain/models/pokemon_details_model.dart';
 
 import '../../../../mocks/details_mocks.mocks.dart';
 

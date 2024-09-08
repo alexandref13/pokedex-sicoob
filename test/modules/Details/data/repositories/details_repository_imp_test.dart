@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
+import 'package:pokedex_sicoob/core/domain/models/pokemon_details_model.dart';
 import 'package:pokedex_sicoob/modules/Details/data/repositories/details_repository.dart';
 import 'package:pokedex_sicoob/modules/Details/data/repositories/details_repository_imp.dart';
-import 'package:pokedex_sicoob/modules/Details/domain/models/pokemon_details_model.dart';
 
 import '../../../../mocks/home_mocks.mocks.dart';
 
@@ -24,12 +24,10 @@ void main() {
     test('should return a PokemonDetailsModel when the response code is 200',
         () async {
       final jsonResponse = jsonEncode({
-        {
-          "id": 1,
-          "name": "pikachu",
-          "base_experience": 10,
-          "height": 10,
-        },
+        "id": 1,
+        "name": "pikachu",
+        "base_experience": 10,
+        "height": 10,
       });
 
       when(mockClient.get(any))

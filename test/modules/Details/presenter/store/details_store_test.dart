@@ -1,67 +1,70 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:pokedex_sicoob/modules/Home/domain/models/pokemon_model.dart';
-import 'package:pokedex_sicoob/modules/Home/presenter/states/pokemon_state.dart';
-import 'package:pokedex_sicoob/modules/Home/presenter/store/home_store.dart';
+import 'package:pokedex_sicoob/core/domain/models/pokemon_details_model.dart';
+import 'package:pokedex_sicoob/modules/Details/presenter/states/pokemon_details_state.dart';
+import 'package:pokedex_sicoob/modules/Details/presenter/store/details_store.dart';
 
-import '../../../../mocks/home_mocks.mocks.dart';
+import '../../../../mocks/details_mocks.mocks.dart';
 
 void main() {
-  late MockGetPokemonsUsecase mockGetPokemonsUsecase;
-  late HomeStore homeStore;
+  late MockGetPokemonDetailsUsecase mockGetPokemonDetailsUsecase;
+  late DetailsStore detailsStore;
 
   setUp(() {
-    mockGetPokemonsUsecase = MockGetPokemonsUsecase();
-    homeStore = HomeStoreImp(getPokemonsUseCase: mockGetPokemonsUsecase);
+    mockGetPokemonDetailsUsecase = MockGetPokemonDetailsUsecase();
+    detailsStore =
+        DetailsStoreImp(getPokemonDetailsUsecase: mockGetPokemonDetailsUsecase);
   });
 
-  test('should start with PokemonLoadingState', () {
-    expect(homeStore.pokemonState, isA<PokemonLoadingState>());
-  });
+  final id = "1";
 
-  test('should return pokemons when fetchPokemons is successful', () async {
-    final pokemons = [
-      PokemonModel(
-          name: 'pikachu', url: 'https://pokeapi.co/api/v2/pokemon/1/'),
-      PokemonModel(
-          name: 'bulbasaur', url: 'https://pokeapi.co/api/v2/pokemon/2/')
-    ];
+  group("DetailsStore", () {
+    test('should start with PokemonDetailsLoadingState', () {
+      expect(detailsStore.pokemonState, isA<PokemonDetailsLoadingState>());
+    });
 
-    when(mockGetPokemonsUsecase.getPokemons())
-        .thenAnswer((_) async => pokemons);
+    test('should return pokemon detail when fetchPokemonById is successful',
+        () async {
+      final pokemonDetails = PokemonDetailsModel(
+          id: 1, name: "pikachu", baseExperience: 10, height: 10);
 
-    final result = homeStore.fetchPokemons();
+      when(mockGetPokemonDetailsUsecase.getPokemonDetails(id: id)).thenAnswer(
+        (_) async => pokemonDetails,
+      );
 
-    expect(homeStore.pokemonState, isA<PokemonLoadingState>());
+      final result = detailsStore.fetchPokemonById(id: id);
 
-    await result;
+      expect(detailsStore.pokemonState, isA<PokemonDetailsLoadingState>());
 
-    expect(homeStore.pokemonState, isA<PokemonSuccessState>());
+      await result;
 
-    final successState = homeStore.pokemonState as PokemonSuccessState;
+      expect(detailsStore.pokemonState, isA<PokemonDetailsSuccessState>());
 
-    expect(successState.pokemons.length, 2);
-    expect(successState.pokemons[0].name, 'pikachu');
-    expect(successState.pokemons[0].id, '1');
+      final successState =
+          detailsStore.pokemonState as PokemonDetailsSuccessState;
 
-    verify(mockGetPokemonsUsecase.getPokemons()).called(1);
-  });
+      expect(successState.pokemon.id, 1);
+      expect(successState.pokemon.name, "pikachu");
 
-  test('should set PokemonErrorState when fetchPokemons throws an error',
-      () async {
-    when(mockGetPokemonsUsecase.getPokemons())
-        .thenThrow(Exception('Failed to fetch'));
+      verify(mockGetPokemonDetailsUsecase.getPokemonDetails(id: id)).called(1);
+    });
 
-    final result = homeStore.fetchPokemons();
+    test('should set PokemonErrorState when fetchPokemons throws an error',
+        () async {
+      when(mockGetPokemonDetailsUsecase.getPokemonDetails(id: id))
+          .thenThrow(Exception('Failed to fetch'));
 
-    expect(homeStore.pokemonState, isA<PokemonLoadingState>());
+      expect(detailsStore.pokemonState, isA<PokemonDetailsLoadingState>());
 
-    await result;
+      final result = detailsStore.fetchPokemonById(id: id);
 
-    expect(homeStore.pokemonState, isA<PokemonErrorState>());
+      await result;
 
-    final errorState = homeStore.pokemonState as PokemonErrorState;
+      expect(detailsStore.pokemonState, isA<PokemonDetailsErrorState>());
 
-    expect(errorState.message, contains('Algo deu errado na solicitação'));
+      final errorState = detailsStore.pokemonState as PokemonDetailsErrorState;
+
+      expect(errorState.message, contains('Algo deu errado na solicitação'));
+    });
   });
 }

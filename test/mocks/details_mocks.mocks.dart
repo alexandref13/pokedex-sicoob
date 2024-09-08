@@ -10,12 +10,12 @@ import 'dart:typed_data' as _i7;
 import 'package:http/http.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i6;
+import 'package:pokedex_sicoob/core/domain/models/pokemon_details_model.dart'
+    as _i3;
 import 'package:pokedex_sicoob/modules/Details/data/repositories/details_repository.dart'
     as _i8;
 import 'package:pokedex_sicoob/modules/Details/data/use_cases/get_pokemon_details_usecase.dart'
     as _i9;
-import 'package:pokedex_sicoob/modules/Details/domain/models/pokemon_details_model.dart'
-    as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
