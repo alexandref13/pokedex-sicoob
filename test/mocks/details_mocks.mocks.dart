@@ -12,6 +12,8 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i6;
 import 'package:pokedex_sicoob/core/domain/models/pokemon_details_model.dart'
     as _i3;
+import 'package:pokedex_sicoob/core/service/pokemon_platform_channel.dart'
+    as _i10;
 import 'package:pokedex_sicoob/modules/Details/data/repositories/details_repository.dart'
     as _i8;
 import 'package:pokedex_sicoob/modules/Details/data/use_cases/get_pokemon_details_usecase.dart'
@@ -355,4 +357,29 @@ class MockGetPokemonDetailsUsecase extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i3.PokemonDetailsModel>);
+}
+
+/// A class which mocks [PokemonPlatformChannel].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockPokemonPlatformChannel extends _i1.Mock
+    implements _i10.PokemonPlatformChannel {
+  MockPokemonPlatformChannel() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<String> getBatteryLevel() => (super.noSuchMethod(
+        Invocation.method(
+          #getBatteryLevel,
+          [],
+        ),
+        returnValue: _i4.Future<String>.value(_i6.dummyValue<String>(
+          this,
+          Invocation.method(
+            #getBatteryLevel,
+            [],
+          ),
+        )),
+      ) as _i4.Future<String>);
 }

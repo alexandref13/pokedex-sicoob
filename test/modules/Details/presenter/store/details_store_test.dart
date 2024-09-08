@@ -8,12 +8,16 @@ import '../../../../mocks/details_mocks.mocks.dart';
 
 void main() {
   late MockGetPokemonDetailsUsecase mockGetPokemonDetailsUsecase;
+  late MockPokemonPlatformChannel mockPokemonPlatformChannel;
   late DetailsStore detailsStore;
 
   setUp(() {
     mockGetPokemonDetailsUsecase = MockGetPokemonDetailsUsecase();
-    detailsStore =
-        DetailsStoreImp(getPokemonDetailsUsecase: mockGetPokemonDetailsUsecase);
+    mockPokemonPlatformChannel = MockPokemonPlatformChannel();
+    detailsStore = DetailsStoreImp(
+      getPokemonDetailsUsecase: mockGetPokemonDetailsUsecase,
+      pokemonPlatformChannel: mockPokemonPlatformChannel,
+    );
   });
 
   final id = "1";
