@@ -4,7 +4,6 @@ import 'package:get_it/get_it.dart';
 import 'package:pokedex_sicoob/core/domain/models/pokemon_details_model.dart';
 import 'package:pokedex_sicoob/core/extensions/navigation_extensions.dart';
 import 'package:pokedex_sicoob/core/extensions/string_extensions.dart';
-import 'package:pokedex_sicoob/core/service/pokemon_platform_channel.dart';
 import 'package:pokedex_sicoob/core/widgets/loading_widget.dart';
 import 'package:pokedex_sicoob/modules/Details/presenter/states/pokemon_details_state.dart';
 import 'package:pokedex_sicoob/modules/Details/presenter/store/details_store.dart';
@@ -24,7 +23,6 @@ class DetailsScreen extends StatefulWidget {
 
 class _DetailsScreenState extends State<DetailsScreen> {
   DetailsStore store = GetIt.instance();
-  PokemonPlatformChannel pokemonPlatformChannel = GetIt.instance();
 
   var result = "";
 
@@ -69,6 +67,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 child: Text(pokemonState.message),
               );
             }
+            // NOTE -> Sendo sincero, nao tive muita ideia do que fazer com o código nativo entao so deixei esse exemplo da bateria feito no kotlin e no swift mesmo
 
             if (pokemonState is PokemonDetailsSuccessState) {
               return Column(
@@ -85,14 +84,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   ),
                   ElevatedButton(
                     onPressed: () async {
-                      result = await pokemonPlatformChannel.getBatteryLevel();
-
-                      setState(() {});
+                      store.handleGetBatteryLevel();
                     },
                     child: Text("Busque a bateria"),
                   ),
                   Text(
-                    result,
+                    store.batteryLevel,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 30)

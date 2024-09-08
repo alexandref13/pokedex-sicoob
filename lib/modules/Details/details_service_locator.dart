@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
+import 'package:pokedex_sicoob/core/service/pokemon_platform_channel.dart';
 import 'package:pokedex_sicoob/modules/Details/data/repositories/details_repository.dart';
 import 'package:pokedex_sicoob/modules/Details/data/repositories/details_repository_imp.dart';
 import 'package:pokedex_sicoob/modules/Details/data/use_cases/get_pokemon_details_usecase.dart';
@@ -17,6 +18,8 @@ void detailsServiceLocator() {
 
   getIt.registerSingleton<DetailsStore>(
     DetailsStoreImp(
-        getPokemonDetailsUsecase: getIt<GetPokemonDetailsUsecase>()),
+      getPokemonDetailsUsecase: getIt<GetPokemonDetailsUsecase>(),
+      pokemonPlatformChannel: getIt<PokemonPlatformChannel>(),
+    ),
   );
 }

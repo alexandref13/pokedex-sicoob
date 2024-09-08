@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:pokedex_sicoob/core/service/pokemon_platform_channel.dart';
 import 'package:pokedex_sicoob/modules/Details/data/use_cases/get_pokemon_details_usecase.dart';
 import 'package:pokedex_sicoob/modules/Details/presenter/states/pokemon_details_state.dart';
 
@@ -11,9 +12,15 @@ class DetailsStoreImp = DetailsStore with _$DetailsStoreImp;
 
 abstract class DetailsStore with Store {
   GetPokemonDetailsUsecase getPokemonDetailsUsecase;
+  PokemonPlatformChannel pokemonPlatformChannel;
+
   DetailsStore({
     required this.getPokemonDetailsUsecase,
+    required this.pokemonPlatformChannel,
   });
+
+  @observable
+  String batteryLevel = "";
 
   @observable
   PokemonDetailsState pokemonState = PokemonDetailsLoadingState();
@@ -34,5 +41,12 @@ abstract class DetailsStore with Store {
         "Algo deu errado na solicitação, tente novamente mais tarde! $e",
       );
     }
+  }
+
+  @action
+  handleGetBatteryLevel() async {
+    final response = await pokemonPlatformChannel.getBatteryLevel();
+
+    batteryLevel = response;
   }
 }
