@@ -39,5 +39,23 @@ void main() {
       final result = pokemonDetailsModel.toJson();
       expect(result, expectedMap);
     });
+
+    test('should return a proper image url', () {
+      final jsonMap = {
+        "id": 1,
+        "name": "pikachu",
+        "base_experience": 10,
+        "height": 10,
+      };
+
+      final result = PokemonDetailsModel.fromJson(jsonMap);
+
+      expect(result, isA<PokemonDetailsModel>());
+
+      expect(
+        result.image,
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+      );
+    });
   });
 }
