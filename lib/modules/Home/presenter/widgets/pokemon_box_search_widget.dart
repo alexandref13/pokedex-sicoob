@@ -27,6 +27,7 @@ class _PokemonBoxSearchWidgetState extends State<PokemonBoxSearchWidget> {
             onChanged: (String value) {
               homeStore.pokemonNameController.text = value;
             },
+            autocorrect: false,
             decoration: InputDecoration(
               labelText: 'Nome do pokemon',
               border: OutlineInputBorder(),
@@ -36,6 +37,10 @@ class _PokemonBoxSearchWidgetState extends State<PokemonBoxSearchWidget> {
         SizedBox(width: 8),
         ElevatedButton(
           onPressed: () async {
+            if (homeStore.pokemonNameController.text.isEmpty) {
+              return;
+            }
+
             await homeStore.handlePokemonByName(
               name: homeStore.pokemonNameController.text,
             );

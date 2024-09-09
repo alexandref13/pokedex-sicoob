@@ -83,6 +83,7 @@ abstract class HomeStore with Store {
         name: name.toLowerCase().trim(),
       );
 
+      pokemonNameController.text = "";
       pokemonByNameState = PokemonByNameSuccessState(response);
     } on ServerException catch (e) {
       pokemonByNameState = PokemonByNameErrorState(
