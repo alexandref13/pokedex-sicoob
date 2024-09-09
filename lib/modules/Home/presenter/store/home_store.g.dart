@@ -9,22 +9,6 @@ part of 'home_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$HomeStoreImp on HomeStore, Store {
-  late final _$pokemonNameSearchAtom =
-      Atom(name: 'HomeStore.pokemonNameSearch', context: context);
-
-  @override
-  String get pokemonNameSearch {
-    _$pokemonNameSearchAtom.reportRead();
-    return super.pokemonNameSearch;
-  }
-
-  @override
-  set pokemonNameSearch(String value) {
-    _$pokemonNameSearchAtom.reportWrite(value, super.pokemonNameSearch, () {
-      super.pokemonNameSearch = value;
-    });
-  }
-
   late final _$pokemonStateAtom =
       Atom(name: 'HomeStore.pokemonState', context: context);
 
@@ -83,24 +67,9 @@ mixin _$HomeStoreImp on HomeStore, Store {
         .run(() => super.handlePokemonByName(name: name));
   }
 
-  late final _$HomeStoreActionController =
-      ActionController(name: 'HomeStore', context: context);
-
-  @override
-  void setPokemonNameSearch(String value) {
-    final _$actionInfo = _$HomeStoreActionController.startAction(
-        name: 'HomeStore.setPokemonNameSearch');
-    try {
-      return super.setPokemonNameSearch(value);
-    } finally {
-      _$HomeStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
   @override
   String toString() {
     return '''
-pokemonNameSearch: ${pokemonNameSearch},
 pokemonState: ${pokemonState},
 pokemonByNameState: ${pokemonByNameState}
     ''';

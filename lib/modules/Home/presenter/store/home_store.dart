@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pokedex_sicoob/core/domain/exceptions/server_exception.dart';
 import 'package:pokedex_sicoob/modules/Home/data/usecases/get_pokemon_by_name.dart';
@@ -22,16 +23,9 @@ abstract class HomeStore with Store {
     required this.getPokemonByNameUsecase,
   });
 
+  TextEditingController pokemonNameController = TextEditingController();
   ScrollController scrollController = ScrollController();
   int page = 1;
-
-  @observable
-  String pokemonNameSearch = '';
-
-  @action
-  void setPokemonNameSearch(String value) {
-    pokemonNameSearch = value;
-  }
 
   @observable
   PokemonState pokemonState = PokemonLoadingState();
