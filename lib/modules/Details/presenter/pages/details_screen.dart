@@ -56,26 +56,27 @@ class _DetailsScreenState extends State<DetailsScreen> {
           },
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Observer(
-          builder: (context) {
-            final pokemonState = store.pokemonState;
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Observer(
+            builder: (context) {
+              final pokemonState = store.pokemonState;
 
-            if (pokemonState is PokemonDetailsErrorState) {
-              return Center(
-                child: Text(pokemonState.message),
-              );
-            }
-            // NOTE -> Sendo sincero, nao tive muita ideia do que fazer com o código nativo entao so deixei esse exemplo da bateria feito no kotlin e no swift mesmo
+              if (pokemonState is PokemonDetailsErrorState) {
+                return Center(
+                  child: Text(pokemonState.message),
+                );
+              }
+              // NOTE -> Sendo sincero, nao tive muita ideia do que fazer com o código nativo entao so deixei esse exemplo da bateria feito no kotlin e no swift mesmo
 
-            if (pokemonState is PokemonDetailsSuccessState) {
-              return Expanded(
-                child: Column(
+              if (pokemonState is PokemonDetailsSuccessState) {
+                return Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     DetailsPokemonImageWidget(pokemon: pokemonState.pokemon),
-                    Expanded(
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * .2,
                       child: DetailsPokemonInfoWidget(
                         pokemon: pokemonState.pokemon,
                       ),
@@ -99,12 +100,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     ),
                     SizedBox(height: 24)
                   ],
-                ),
-              );
-            }
+                );
+              }
 
-            return LoadingWidget();
-          },
+              return LoadingWidget();
+            },
+          ),
         ),
       ),
     );

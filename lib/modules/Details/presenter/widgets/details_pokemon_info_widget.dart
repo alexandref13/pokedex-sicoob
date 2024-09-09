@@ -31,6 +31,7 @@ class DetailsPokemonInfoWidget extends StatelessWidget {
     ];
 
     return ListView.builder(
+      physics: NeverScrollableScrollPhysics(),
       itemCount: infoList.length,
       itemBuilder: (context, index) {
         var info = infoList[index];
