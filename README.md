@@ -45,6 +45,18 @@ Este projeto utiliza as seguintes tecnologias:
 
 ## Possíveis Melhorias Futuras
 
-- **Temas**: Gostaria de ter aprimorado os temas e as fontes para proporcionar uma experiência visual mais agradável no app. No entanto, optei por concentrar meus esforços nas funcionalidades solicitadas.
+- **Integrações com a PokeAPI:**
 
-- **API**: Tive a intenção de realizar mais integrações com a PokeAPI, como exibir informações adicionais, como os tipos dos Pokémon, o que poderia enriquecer ainda mais a aplicação.
+  - Mostrar tipos de Pokémon.
+  - Adicionar mais detalhes sobre Pokémon, como habilidades e movimentos.
+
+- **Design e Estilo:**
+
+  - Melhorar os temas e fontes do app para um visual mais atraente.
+
+- **Erros:**
+
+  - Lidar melhor com as exceções do app para uma experiência mais robusta e amigável.
+
+- **Skeleton:**
+  - Implementar skeleton screens para uma melhor experiência de carregamento.
