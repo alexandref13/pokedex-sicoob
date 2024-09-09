@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:pokedex_sicoob/core/domain/exceptions/server_exception.dart';
 import 'package:pokedex_sicoob/core/domain/models/pokemon_details_model.dart';
 import 'package:pokedex_sicoob/modules/Home/data/repositories/endpoints/pokemons_endpoint.dart';
 import 'package:pokedex_sicoob/modules/Home/data/repositories/home_repository.dart';
@@ -23,7 +24,7 @@ class HomeRepositoryImp implements HomeRepository {
 
       return pokemons;
     } else {
-      throw Exception();
+      throw ServerException("Algo deu errado, tente novamente mais tarde");
     }
   }
 
@@ -38,7 +39,7 @@ class HomeRepositoryImp implements HomeRepository {
     if (response.statusCode == 200) {
       return PokemonDetailsModel.fromJson(data);
     } else {
-      throw Exception();
+      throw ServerException("Algo deu errado, tente novamente mais tarde");
     }
   }
 }

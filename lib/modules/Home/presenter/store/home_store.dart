@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:pokedex_sicoob/core/domain/exceptions/server_exception.dart';
 import 'package:pokedex_sicoob/modules/Home/data/usecases/get_pokemon_by_name.dart';
 import 'package:pokedex_sicoob/modules/Home/data/usecases/get_pokemons_usecase.dart';
 import 'package:pokedex_sicoob/modules/Home/presenter/states/pokemon_by_name_state.dart';
@@ -46,10 +47,13 @@ abstract class HomeStore with Store {
       final response = await getPokemonsUseCase.getPokemons();
 
       pokemonState = PokemonSuccessState(response);
-    } catch (e) {
-      print(e);
+    } on ServerException catch (e) {
       pokemonState = PokemonErrorState(
-        "Algo deu errado na solicitação, tente novamente mais tarde! $e",
+        e.message,
+      );
+    } catch (e) {
+      pokemonState = PokemonErrorState(
+        "Erro desconhecido, sentimos muito",
       );
     }
   }
@@ -65,10 +69,13 @@ abstract class HomeStore with Store {
         ...firstsPokemons,
         ...response,
       ]);
-    } catch (e) {
-      print(e);
+    } on ServerException catch (e) {
       pokemonState = PokemonErrorState(
-        "Algo deu errado na solicitação, tente novamente mais tarde! $e",
+        e.message,
+      );
+    } catch (e) {
+      pokemonState = PokemonErrorState(
+        "Erro desconhecido, sentimos muito",
       );
     }
   }
@@ -83,9 +90,13 @@ abstract class HomeStore with Store {
       );
 
       pokemonByNameState = PokemonByNameSuccessState(response);
+    } on ServerException catch (e) {
+      pokemonByNameState = PokemonByNameErrorState(
+        e.message,
+      );
     } catch (e) {
       pokemonByNameState = PokemonByNameErrorState(
-        "Algo deu errado na solicitação, tente novamente mais tarde! $e",
+        "Erro desconhecido, sentimos muito",
       );
     }
   }

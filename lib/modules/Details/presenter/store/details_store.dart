@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:pokedex_sicoob/core/domain/exceptions/server_exception.dart';
 import 'package:pokedex_sicoob/core/service/pokemon_platform_channel.dart';
 import 'package:pokedex_sicoob/modules/Details/data/use_cases/get_pokemon_details_usecase.dart';
 import 'package:pokedex_sicoob/modules/Details/presenter/states/pokemon_details_state.dart';
@@ -35,10 +36,13 @@ abstract class DetailsStore with Store {
       );
 
       pokemonState = PokemonDetailsSuccessState(response);
-    } catch (e) {
-      print(e);
+    } on ServerException catch (e) {
       pokemonState = PokemonDetailsErrorState(
-        "Algo deu errado na solicitação, tente novamente mais tarde! $e",
+        e.message,
+      );
+    } catch (e) {
+      pokemonState = PokemonDetailsErrorState(
+        "Erro desconhecido, sentimos muito",
       );
     }
   }
