@@ -70,34 +70,36 @@ class _DetailsScreenState extends State<DetailsScreen> {
             // NOTE -> Sendo sincero, nao tive muita ideia do que fazer com o código nativo entao so deixei esse exemplo da bateria feito no kotlin e no swift mesmo
 
             if (pokemonState is PokemonDetailsSuccessState) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  DetailsPokemonImageWidget(pokemon: pokemonState.pokemon),
-                  Expanded(
-                    child: DetailsPokemonInfoWidget(
-                      pokemon: pokemonState.pokemon,
+              return Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    DetailsPokemonImageWidget(pokemon: pokemonState.pokemon),
+                    Expanded(
+                      child: DetailsPokemonInfoWidget(
+                        pokemon: pokemonState.pokemon,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      store.handleGetBatteryLevel();
-                    },
-                    child: Text(
-                      "Veja agora a porcentagem de capturar este pokemon de acordo com sua bateria",
-                      textAlign: TextAlign.center,
+                    SizedBox(
+                      height: 16,
                     ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    store.batteryLevel,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 24)
-                ],
+                    ElevatedButton(
+                      onPressed: () async {
+                        store.handleGetBatteryLevel();
+                      },
+                      child: Text(
+                        "Veja suas chances de capturar este Pokemon",
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      store.batteryLevel,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 24)
+                  ],
+                ),
               );
             }
 

@@ -9,9 +9,16 @@ class PokemonPlatformChannelImp implements PokemonPlatformChannel {
     String batteryLevel;
     try {
       final result = await platform.invokeMethod<int>('getBatteryLevel');
-      batteryLevel = 'Battery level at $result % .';
-    } on PlatformException catch (e) {
-      batteryLevel = "Failed to get battery level: '${e.message}'.";
+
+      print({result});
+      if (result != null && result >= 50) {
+        batteryLevel = 'UAU, voce com certeza vai capturar este pokemon.';
+      }
+
+      batteryLevel =
+          "As chances não as melhores, mas os melhores estão preparados pra isso!";
+    } on PlatformException catch (_) {
+      batteryLevel = "Acho que ele já fugiu, sinto muito";
     }
 
     return batteryLevel;
