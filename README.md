@@ -1,16 +1,50 @@
-# pokedex_sicoob
+# Projeto Pokedex - Sicoob
 
-A new Flutter project.
+## Instruções para Rodar o Projeto Flutter
 
-## Getting Started
+### 1. Clonar o Repositório
 
-This project is a starting point for a Flutter application.
+Abra o terminal e execute o seguinte comando para clonar o repositório:
 
-A few resources to get you started if this is your first Flutter project:
+```bash
+git clone https://github.com/alexandref13/pokedex-sicoob
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### 2. Navegar para o Diretório do Projeto
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Depois de clonar o repositório, entre no diretório do projeto com o comando:
+
+```bash
+cd pokedex-sicoob
+```
+
+### 3. Instalar as Dependências
+
+Instale as dependências do Flutter executando:
+
+```bash
+flutter pub get
+```
+
+### 4. Rodar o Projeto
+
+Conecte um dispositivo (físico ou emulador) e execute o comando:
+
+```bash
+flutter run
+```
+
+## Tecnologias Usadas no Projeto
+
+Este projeto utiliza as seguintes tecnologias:
+
+- **Flutter**: Framework para desenvolvimento de aplicações móveis, web e desktop com uma única base de código.
+- **MobX**: Biblioteca de gerenciamento de estado reativo que simplifica a sincronização de dados.
+- **Get_it**: Ferramenta para injeção de dependência usada para gerenciar serviços e instâncias no Flutter.
+- **Unit Test**: Utilizado para garantir que as unidades de código funcionem como esperado por meio de testes automatizados.
+
+## Possíveis Melhorias Futuras
+
+- **Temas**: Gostaria de ter aprimorado os temas e as fontes para proporcionar uma experiência visual mais agradável no app. No entanto, optei por concentrar meus esforços nas funcionalidades solicitadas.
+
+- **API**: Tive a intenção de realizar mais integrações com a PokeAPI, como exibir informações adicionais, como os tipos dos Pokémon, o que poderia enriquecer ainda mais a aplicação.
